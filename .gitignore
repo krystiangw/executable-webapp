@@ -1,5 +1,5 @@
-/node_modules/
-/bower_components/
-/downloads/
-!/downloads/package.json
-/cache/
+node_modules/
+bower_components/
+downloads/
+!downloads/package.json
+cache/
