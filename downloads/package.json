@@ -1,0 +1,9 @@
+{
+  "name": "off",
+  "version": "1.0.0",
+  "main": "off.html",
+  "window": {
+    "frame": true,
+    "toolbar": false
+  }
+}
