@@ -22,7 +22,7 @@ function create(format, tempDirectory) {
   nw.on('log',  console.log);
 
   return packageGenerator.create(tempDirectory)
-  .then(function() {
-    return nw.build();
-  });
+    .then(function() {
+      return nw.build();
+    });
 }

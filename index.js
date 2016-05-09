@@ -1,11 +1,8 @@
-/* globals app */
-
 var express = require('express');
-global.app = express();
+var app = express();
 var cors = require('cors');
 
 var config = require('./app/config');
-require('./app/route');
 
 app.use(cors());
 app.set('port', (process.env.PORT || config.DEFAULT_PORT));
@@ -16,3 +13,6 @@ var server = app.listen(app.get('port'), function() {
 });
 
 server.timeout = config.REQUEST_TIMEOUT;
+
+global.app = app;
+require('./app/route');

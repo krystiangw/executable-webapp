@@ -18,15 +18,11 @@ app.post('/', function (req, res) {
   .then(function() {
     return execGenerator.create(format, tempDirectory);
   }).then(function () {
-    return archiveAndSendDir(res, tempDirectory + '/' + config.BUILDS_FOLDERNAME + '/' + format);
+    return archiveAndSendDir(res, tempDirectory + '/' + config.GENERATED_APP_NAME + '/' + format);
   }).catch(function (error) {
-    console.error('ERROR!!! ', error);
+    res.status(500).send({ error: error });
   });
 });
-
-function getFormat(req) {
-  return url.parse(req.url, true).query.format || config.DEFAULT_FORMAT;
-}
 
 function archiveAndSendDir(res, dir) {
   var archive = archiver('zip', {});
@@ -44,3 +40,6 @@ function archiveAndSendDir(res, dir) {
   return archive.finalize();
 }
 
+function getFormat(req) {
+  return url.parse(req.url, true).query.format || config.DEFAULT_FORMAT;
+}

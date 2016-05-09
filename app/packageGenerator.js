@@ -10,7 +10,7 @@ module.exports = {
 function create(dest) {
   var obj = {
     version: '1.0.0',
-    name: config.BUILDS_FOLDERNAME,
+    name: config.GENERATED_APP_NAME,
     main: config.TEMP_FILENAME,
     window: {
       frame: true,
