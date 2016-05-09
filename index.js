@@ -68,7 +68,7 @@ function generateExecutable(format) {
     files: DOWNLOADS_DIRECTORY + '**/*',
     platforms: [format],
     version: '0.12.0',
-    buildDir: "temp/build",
+    buildDir: BUILD_DIRECTORY,
     window: {
       frame: false,
       toolbar: false
