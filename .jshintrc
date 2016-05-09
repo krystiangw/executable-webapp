@@ -1,0 +1,23 @@
+{
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "freeze": true,
+  "immed": true,
+  "indent": 2,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonbsp": true,
+  "quotmark": "single",
+  "undef": true,
+  "eqnull": true,
+  "sub": true,
+  "devel": true,
+  "node": true,
+  "esnext": true,
+  "camelcase": false,
+  "globals": {
+    "console": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "preset": "airbnb",
+  "excludeFiles": [
+    "node_modules/**",
+    "core/node_modules/**",
+    "bower_components/**",
+    "app/**",
+    "core/docs/**"],
+  "esnext": true,
+  "disallowTrailingWhitespace": null,
+  "requireDotNotation": null,
+  "requirePaddingNewLinesAfterBlocks": null,
+  "requireCamelCaseOrUpperCaseIdentifiers": null,
+  "disallowTrailingComma": true,
+  "maximumLineLength": 150,
+  "validateLineBreaks": "LF",
+  "requireTrailingComma": false
+}
