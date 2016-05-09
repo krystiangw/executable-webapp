@@ -3,7 +3,7 @@ Simple node express app generating executable app from html file.
 Uses [nw-builder](https://github.com/nwjs/nw-builder) project for building executable files.
 
 ## Requirements
-Install Nodejs in version >= 4.4.0
+[Install nodejs](https://nodejs.org/en/download/package-manager/) in version >= 4.4.0
 ```
 sudo apt-get install nodejs
 ```
@@ -14,12 +14,13 @@ npm install
 ```
 
 ## Running
-To set server port.
+To set server port: 
 ```
 export PORT=8080
 ```
+Default port is ```3000```.
 
-To run app
+To run app:
 ```
 node index.js
 ```

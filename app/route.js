@@ -16,7 +16,7 @@ app.post('/', function (req, res) {
   });
 
   uploader.upload(req, res, tempDirectory)
-  .then(function() {
+  .then(function () {
     return execGenerator.create(format, tempDirectory);
   }).then(function () {
     return archiveAndSendDir(res, tempDirectory + '/' + config.GENERATED_APP_NAME + '/' + format);
