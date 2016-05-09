@@ -12,7 +12,9 @@
     "archiver": "^1.0.0",
     "cors": "^2.7.1",
     "express": "^4.13.4",
+    "jsonfile": "^2.3.0",
     "multer": "^1.1.0",
-    "nw-builder": "^2.2.0"
+    "nw-builder": "^2.2.0",
+    "randomstring": "^1.1.4"
   }
 }

@@ -1,5 +1,6 @@
 # executable-webapp
 Simple node express app generating executable app from html file.
+Uses [nw-builder](https://github.com/nwjs/nw-builder) project for building executable files.
 
 ## Requirements
 Install Nodejs in version >= 4.4.0
@@ -34,8 +35,6 @@ Avaliable formats:
 * ```linux32```
 * ```linux64```
 
-Example:
-
-```APP_URL/?format=win32```
+Example: ```APP_URL/?format=win32```
 
 Returns zipped folder with executable app in specified format.
