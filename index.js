@@ -14,6 +14,9 @@ const REQUEST_TIMEOUT = 200000;
 
 app.use(cors());
 
+app.set('port', (process.env.PORT || 3000));
+app.use(express.static(__dirname + '/public'));
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, DOWNLOADS_DIRECTORY);
@@ -24,9 +27,9 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({ storage: storage }).single('file');
- 
-var server = app.listen(3000, function () {
-  console.log('App started. Listen on port 3000.');
+
+var server = app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'));
 });
 
 server.timeout = REQUEST_TIMEOUT;
