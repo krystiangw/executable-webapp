@@ -2,6 +2,7 @@
 var archiver = require('archiver');
 var url = require('url');
 var randomstring = require('randomstring');
+var del = require('del');
 
 var uploader = require('./uploader');
 var execGenerator = require('./execGenerator');
@@ -19,27 +20,39 @@ app.post('/', function (req, res) {
     return execGenerator.create(format, tempDirectory);
   }).then(function () {
     return archiveAndSendDir(res, tempDirectory + '/' + config.GENERATED_APP_NAME + '/' + format);
+  }).then(function () {
+    removeDir(tempDirectory);
   }).catch(function (error) {
     res.status(500).send({ error: error });
+    removeDir(tempDirectory);
   });
 });
 
 function archiveAndSendDir(res, dir) {
-  var archive = archiver('zip', {});
-  archive.on('error', function(err) {
-    console.error('error ', err);
+  var promise = new Promise(function(resolve, reject) {
+    var archive = archiver('zip', {});
+    archive.on('error', reject);
+
+    archive.on('end', function() {
+      console.log('Archive wrote %d bytes', archive.pointer());
+      resolve();
+    });
+
+    archive.pipe(res);
+
+    archive.directory(dir, '');
+    archive.finalize();
   });
 
-  archive.on('end', function() {
-    console.log('Archive wrote %d bytes', archive.pointer());
-  });
-
-  archive.pipe(res);
-
-  archive.directory(dir, '');
-  return archive.finalize();
+  return promise;
 }
 
 function getFormat(req) {
   return url.parse(req.url, true).query.format || config.DEFAULT_FORMAT;
+}
+
+function removeDir(dir) {
+  return del(dir).then(paths => {
+    console.log('Deleted temp folder:\n', paths.join('\n'));
+  });
 }

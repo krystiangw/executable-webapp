@@ -16,3 +16,4 @@ server.timeout = config.REQUEST_TIMEOUT;
 
 global.app = app;
 require('./app/route');
+require('./app/exitHandler');

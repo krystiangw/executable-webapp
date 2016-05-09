@@ -9,6 +9,7 @@ module.exports = {
 };
 
 function upload(req, res, dest) {
+  mkdirSync(config.TEMP_DIRECTORY);
   mkdirSync(dest);
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
