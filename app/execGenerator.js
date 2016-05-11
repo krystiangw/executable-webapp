@@ -6,22 +6,24 @@ module.exports = {
   create: create
 };
 
-function create(format, tempDirectory) {
+function create(format, tempDirectory, title) {
   var nw = new NwBuilder({
     files: tempDirectory + '/**/*',
     platforms: [format],
     version: '0.12.0',
-    buildDir: tempDirectory,
-    main: 'main.html',
-    window: {
-      frame: false,
-      toolbar: false
-    }
+    buildDir: tempDirectory
   });
 
   nw.on('log',  console.log);
 
-  return packageGenerator.create(tempDirectory)
+  return packageGenerator.create(
+    tempDirectory,
+    {
+      name: title,
+      window: {
+        title: title
+      }
+    })
     .then(function() {
       return nw.build();
     });

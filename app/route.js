@@ -9,7 +9,8 @@ var execGenerator = require('./execGenerator');
 var config = require('./config');
 
 app.post('/', function (req, res) {
-  var format = getFormat(req);
+  var format = getQueryValue(req, 'format') || config.DEFAULT_FORMAT;
+  var title = getQueryValue(req, 'title') || config.DEFAULT_TITLE;
   var tempDirectory = config.TEMP_DIRECTORY + randomstring.generate({
     length: 12,
     charset: 'alphabetic'
@@ -17,9 +18,9 @@ app.post('/', function (req, res) {
 
   uploader.upload(req, res, tempDirectory)
   .then(function () {
-    return execGenerator.create(format, tempDirectory);
+    return execGenerator.create(format, tempDirectory, title);
   }).then(function () {
-    return archiveAndSendDir(res, tempDirectory + '/' + config.GENERATED_APP_NAME + '/' + format);
+    return archiveAndSendDir(res, tempDirectory + '/' + title + '/' + format);
   }).then(function () {
     removeDir(tempDirectory);
   }).catch(function (error) {
@@ -47,8 +48,8 @@ function archiveAndSendDir(res, dir) {
   return promise;
 }
 
-function getFormat(req) {
-  return url.parse(req.url, true).query.format || config.DEFAULT_FORMAT;
+function getQueryValue(req, key) {
+  return url.parse(req.url, true).query[key];
 }
 
 function removeDir(dir) {

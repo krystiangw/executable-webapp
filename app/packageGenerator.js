@@ -1,4 +1,5 @@
 var jsonfile = require('jsonfile');
+var _ = require('lodash');
 jsonfile.spaces = 4;
 
 var config = require('./config');
@@ -7,19 +8,22 @@ module.exports = {
   create: create
 };
 
-function create(dest) {
-  var obj = {
+function create(dest, conf) {
+  conf = conf || {};
+  var defaultConf = {
     version: '1.0.0',
-    name: config.GENERATED_APP_NAME,
+    name: config.DEFAULT_TITLE,
     main: config.TEMP_FILENAME,
     window: {
+      title: config.DEFAULT_TITLE,
+      position: 'center',
       frame: true,
       toolbar: false
     }
   };
 
   var promise = new Promise(function(resolve, reject) {
-    jsonfile.writeFile(dest + '/package.json', obj, function (err) {
+    jsonfile.writeFile(dest + '/package.json', _.merge({}, defaultConf, conf), function (err) {
       if (err) {
         reject(err);
       } else {
